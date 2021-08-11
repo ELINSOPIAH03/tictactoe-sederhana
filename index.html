@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<link rel="icon" href="2.png">
+		<title>tic tc toe | idr corner</title>
+		<style>
+			#kotak{
+				padding:0;
+				border:solid 1px #ccc;
+				width:300px;
+				height:300px;
+			}
+			#tombol{
+				width:100px;
+				height:100px;
+				float:left;
+			}
+			.depan{
+				width:100px;
+				height:100px;
+				position:absolute;
+				transform:perspective(600px)rotateY(0deg);
+				border:solid 1px #000;
+				backface-visibility:hidden;
+				transition:transform 1s linear 0s;
+				text-align:center;
+				font-family:Times New Roman;
+				font-size:80px;
+				
+			}
+			.belakang{
+				width:100px;
+				height:100px;
+				position:absolute;
+				transform:perspective(600px)rotateY(180deg);
+				border:solid 1px #000;
+				backface-visibility:hidden;
+				transition:transform 1s linear 0s;
+				font-family:Times New Roman;
+				font-size:80px;
+			}
+		</style>
+	</head>
+	<body bgcolor="coral">
+	<center><h1>TIC TC TOEN</h1></center>
+		<div id="kotak">
+		
+			<div id="tombol" onclick="kliktombol(1)">
+				<button id="btn1D" class="depan">?</button>
+				<button id="btn1B" class="belakang"></button>
+			</div>	
+			<div id="tombol" onclick="kliktombol(2)">
+				<button id="btn2D" class="depan">?</button>
+				<button id="btn2B" class="belakang"></button>
+			</div>	
+			<div id="tombol" onclick="kliktombol(3)">
+				<button id="btn3D" class="depan">?</button>
+				<button id="btn3B" class="belakang"></button>
+			</div>	
+			<div id="tombol" onclick="kliktombol(4)">
+				<button id="btn4D" class="depan">?</button>
+				<button id="btn4B" class="belakang"></button>
+			</div>	
+			<div id="tombol" onclick="kliktombol(5)">
+				<button id="btn5D" class="depan">?</button>
+				<button id="btn5B" class="belakang"></button>
+			</div>	
+			<div id="tombol" onclick="kliktombol(6)">
+				<button id="btn6D" class="depan">?</button>
+				<button id="btn6B" class="belakang"></button>
+			</div>	
+			<div id="tombol" onclick="kliktombol(7)">
+				<button id="btn7D" class="depan">?</button>
+				<button id="btn7B" class="belakang"></button>
+			</div>	
+			<div id="tombol" onclick="kliktombol(8)">
+				<button id="btn8D" class="depan">?</button>
+				<button id="btn8B" class="belakang"></button>
+			</div>	
+			<div id="tombol" onclick="kliktombol(9)">
+				<button id="btn9D" class="depan">?</button>
+				<button id="btn9B" class="belakang"></button>
+			</div>	
+			
+			
+		</div>
+		<h1 id="ket"></h1>
+		
+		
+		
+		<script>
+		var pemain="X";
+		
+		document.getElementById("ket").innerHTML="GILIRAN PEMAIN : "+ pemain;
+		
+		
+			function kliktombol(x){
+				document.getElementById("btn"+x+"D").style.transform="perspective(600px)rotateY(-180deg)";
+				
+				document.getElementById("btn"+x+"B").style.transform="perspective(600px)rotateY(0deg)";
+				
+				document.getElementById("btn"+x+"B").innerHTML=pemain;
+				document.getElementById("btn"+x+"B").value=pemain;
+				
+				document.getElementById("btn"+x+"B").disabled="disabled";
+				
+				if(pemain=="X"){
+				document.getElementById("ket").innerHTML="gililran pemain : O ";
+					cekpemenang();
+					pemain="O";
+				}else{
+				document.getElementById("ket").innerHTML="gililran pemain : X ";
+					cekpemenang();
+					pemain="X";
+				}
+				
+			}
+			
+			function cekpemenang(){
+				if( document.getElementById("btn1B").value==pemain &&
+				document.getElementById("btn2B").value==pemain &&
+				document.getElementById("btn3B").value==pemain 
+				){
+					menang(1,2,3);
+					}else if(document.getElementById("btn4B").value==pemain &&
+				document.getElementById("btn5B").value==pemain &&
+				document.getElementById("btn6B").value==pemain
+				){
+					menang(4,5,6);
+					}else if( document.getElementById("btn7B").value==pemain &&
+				document.getElementById("btn8B").value==pemain &&
+				document.getElementById("btn9B").value==pemain
+				){
+					menang(7,8,9);
+					}else if( document.getElementById("btn1B").value==pemain &&
+				document.getElementById("btn4B").value==pemain &&
+				document.getElementById("btn7B").value==pemain
+				){
+					menang(1,4,7);
+					}else if( document.getElementById("btn2B").value==pemain &&
+				document.getElementById("btn5B").value==pemain &&
+				document.getElementById("btn8B").value==pemain
+				){
+					menang(2,5,8);
+					}else if( document.getElementById("btn3B").value==pemain &&
+				document.getElementById("btn6B").value==pemain &&
+				document.getElementById("btn9B").value==pemain
+				){
+					menang(3,6,9);
+					}else if( document.getElementById("btn1B").value==pemain &&
+				document.getElementById("btn5B").value==pemain &&
+				document.getElementById("btn9B").value==pemain
+				){
+					menang(1,5,9);
+					}else if( document.getElementById("btn3B").value==pemain &&
+				document.getElementById("btn5B").value==pemain &&
+				document.getElementById("btn7B").value==pemain
+				){
+					menang(3,5,7);
+					}
+				}
+			
+			function menang(a,b,c){
+				document.getElementById("ket").innerHTML="pemenang nya adalah pemain : "+ pemain;
+				
+				
+				for(i=1;i<10;i++){
+					document.getElementById("btn"+i+"D").disabled="disabled";
+				}
+				var x=1;
+				function animasi(){
+					if(x==1){
+						document.getElementById("btn"+a+"B").style.background="salmon";
+						document.getElementById("btn"+b+"B").style.background="red";
+						document.getElementById("btn"+c+"B").style.background="salmon";
+					x=2;
+				}else if(x==2){
+						document.getElementById("btn"+c+"B").style.background="salmon";
+						document.getElementById("btn"+a+"B").style.background="red";
+						document.getElementById("btn"+b+"B").style.background="salmon";
+					x=3;
+				}else if(x==3){
+						document.getElementById("btn"+b+"B").style.background="salmon";
+						document.getElementById("btn"+c+"B").style.background="red";
+						document.getElementById("btn"+a+"B").style.background="salmon";
+					x=1;
+						}
+					}
+				setInterval(animasi,150);
+				}
+		</script>
+	</body>
+</html>
